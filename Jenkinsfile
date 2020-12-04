@@ -2,7 +2,12 @@
 
 //DECLARATIVE
 pipeline {
-	agent { dockerfile true }
+	agent any
+	
+	environment {
+		dockerHome = tool 'MyDocker'
+		PATH = "$dockerHome/bin:$PATH"
+	}
 
 	stages {
 		stage('Checkout') {
@@ -10,7 +15,7 @@ pipeline {
 			    echo 'Checkout Start'
 				sh 'docker version'
 				echo "Build"
-				
+				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 				echo "BUILD_ID - $env.BUILD_ID"
 				echo "JOB_NAME - $env.JOB_NAME"
