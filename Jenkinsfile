@@ -12,6 +12,7 @@ pipeline {
 	stages {
 		stage('Checkout') {
 			steps {
+			    echo 'Checkout Start'
 				sh 'docker version'
 				echo "Build"
 				echo "PATH - $PATH"
@@ -20,6 +21,7 @@ pipeline {
 				echo "JOB_NAME - $env.JOB_NAME"
 				echo "BUILD_TAG - $env.BUILD_TAG"
 				echo "BUILD_URL - $env.BUILD_URL"
+				echo 'Checkout End'
 			}
 		}
 		stage('Compile') {
