@@ -2,13 +2,10 @@
 
 //DECLARATIVE
 pipeline {
-	agent any
+	agent {
+        dockerfile true
+    }
 	
-	environment {
-		dockerHome = tool 'MyDocker'
-		PATH = "$dockerHome/bin:$PATH"
-	}
-
 	stages {
 		stage('Checkout') {
 			steps {
