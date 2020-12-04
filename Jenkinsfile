@@ -13,6 +13,7 @@ pipeline {
 		stage('Checkout') {
 			steps {
 			    echo 'Checkout Start'
+				sh 'docker version'
 				echo "Build"
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
