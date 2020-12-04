@@ -2,9 +2,7 @@
 
 //DECLARATIVE
 pipeline {
-	agent {
-        dockerfile true
-    }
+	agent any
 	
 	environment {
 		dockerHome = tool 'MyDocker'
