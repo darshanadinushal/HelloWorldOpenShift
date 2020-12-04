@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace HelloWorldOpenShift.Controllers
@@ -26,12 +27,15 @@ namespace HelloWorldOpenShift.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            String hostname = Dns.GetHostName();
+
+            
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
-                Date = DateTime.Now.AddDays(index),
+                Date = DateTime.Now.AddDays(index).ToShortDateString(),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
+                HostMachine = "The HOST running this app is named: " + hostname
             })
             .ToArray();
         }
