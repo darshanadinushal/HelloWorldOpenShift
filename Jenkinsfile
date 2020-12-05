@@ -22,7 +22,7 @@ pipeline {
 				echo "BUILD_URL - $env.BUILD_URL"
 				echo 'Checkout End'
 
-				sudo apt-get update
+				sudo 'apt-get update'
 
 				sh 'docker version'
 			}
