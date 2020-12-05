@@ -5,7 +5,7 @@ pipeline {
 	agent any
 	
 	environment {
-		dockerHome = tool 'MyDocker'
+		dockerHome = tool 'myDocker'
 		PATH = "$dockerHome/bin:$PATH"
 	}
 
