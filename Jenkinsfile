@@ -2,43 +2,24 @@
 
 //DECLARATIVE
 pipeline {
-	agent any
+//	agent any
 	
-	environment {
-		dockerHome = tool 'MyDocker'
-		PATH = "$dockerHome/bin:$PATH"
-	}
+	agent {docker {image 'maven:3.6.3'}}
 
 	stages {
-		stage('Checkout') {
+		stage('Build') {
 			steps {
-			    echo 'Checkout Start'
-				echo "Build"
-				echo "PATH - $PATH"
-				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
-				echo "BUILD_ID - $env.BUILD_ID"
-				echo "JOB_NAME - $env.JOB_NAME"
-				echo "BUILD_TAG - $env.BUILD_TAG"
-				echo "BUILD_URL - $env.BUILD_URL"
-				echo 'Checkout End'
-
-				sudo 'apt-get update'
-
-				sh 'docker version'
+			    sh 'mvn --version'
+				// sh 'docker version'
 			}
 		}
-		stage('Compile') {
-			steps {
-				echo 'Compile or Build'
-			}
-		}
-
 		stage('Test') {
 			steps {
-				echo 'Unit Test'
+				echo 'Test'
 			}
 		}
 
+		
 		stage('Integration Test') {
 			steps {
 				echo 'Integration Test'
@@ -52,26 +33,7 @@ pipeline {
 			}
 		}
 
-		stage('Build Docker Image') {
-			steps {
-				//"docker build -t darshanadinushal/helloworldapp:$env.BUILD_TAG"
-				script {
-					dockerImage = docker.build("darshanadinushal/helloworldapp:${env.BUILD_TAG}")
-				}
-
-			}
-		}
-
-		stage('Push Docker Image') {
-			steps {
-				script {
-					docker.withRegistry('', 'dockerhub') {
-						dockerImage.push();
-						dockerImage.push('latest');
-					}
-				}
-			}
-		}
+		
 	} 
 	
 	post {
