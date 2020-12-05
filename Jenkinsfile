@@ -21,6 +21,9 @@ pipeline {
 				echo "BUILD_TAG - $env.BUILD_TAG"
 				echo "BUILD_URL - $env.BUILD_URL"
 				echo 'Checkout End'
+
+				sudo apt-get update
+
 				sh 'docker version'
 			}
 		}
