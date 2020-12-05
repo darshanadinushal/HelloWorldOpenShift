@@ -13,7 +13,6 @@ pipeline {
 		stage('Checkout') {
 			steps {
 			    echo 'Checkout Start'
-				echo docker version
 				sh 'docker version'
 				echo "Build"
 				echo "PATH - $PATH"
