@@ -13,7 +13,7 @@ pipeline {
 	stages {
 		stage('Build') {
 			steps {
-			echo "$dockerHome"
+			
 			  echo "PATH - $PATH"
 			   echo 'mvn --version'
 			}
