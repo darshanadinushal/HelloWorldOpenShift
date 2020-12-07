@@ -5,8 +5,9 @@ pipeline {
 	agent any
 	
 	environment {
-		dockerHome = tool 'myDocker'
-		PATH = "$dockerHome/bin:$PATH"
+		def dockerHome = tool 'myDocker'
+        def mavenHome  = tool 'myMaven'
+		env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
 	}
 
 
@@ -14,7 +15,7 @@ pipeline {
 		stage('Build') {
 			steps {
 			
-			  echo "PATH - $PATH"
+			  //echo "PATH - $PATH"
 			  sh 'docker version'
 			}
 		}
