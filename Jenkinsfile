@@ -16,7 +16,7 @@ pipeline {
 			steps {
 			
 			  //echo "PATH - $PATH"
-			  sh 'docker version'
+			  sh 'sudo  docker version'
 			}
 		}
 		stage('Test') {
