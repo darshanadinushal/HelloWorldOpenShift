@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HelloWorldOpenShift.Controllers
 {
@@ -12,19 +8,17 @@ namespace HelloWorldOpenShift.Controllers
     [ApiController]
     public class AppSettingController : ControllerBase
     {
-        private IConfiguration configuration;
-        public AppSettingController(IConfiguration _configuration)
+        private readonly Models.Config _config;
+        public AppSettingController(IOptionsMonitor<Models.Config> config)
         {
-            configuration = _configuration;
+            _config = config.CurrentValue;
         }
 
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            string dbConn = configuration.GetSection("MySettings").GetSection("DbConnection").Value;
-
-            return Ok(dbConn);
+            return new string[] { _config.message };
         }
     }
 }

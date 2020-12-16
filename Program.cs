@@ -20,7 +20,11 @@ namespace HelloWorldOpenShift
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureAppConfiguration(conf =>
+                    {
+                        conf.AddJsonFile("conf/config.json",
+                            optional: true, reloadOnChange: true);
+                    }).UseStartup<Startup>();
                 });
     }
 }
