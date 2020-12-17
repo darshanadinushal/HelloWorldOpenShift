@@ -22,8 +22,8 @@ namespace HelloWorldOpenShift
                 {
                     webBuilder.ConfigureAppConfiguration(conf =>
                     {
-                        conf.AddJsonFile("conf/config.json",
-                            optional: true, reloadOnChange: true);
+                        conf.AddJsonFile("conf/config.json",optional: true, reloadOnChange: true);
+                        conf.AddJsonFile("appsettings.json", optional: true);
                     }).UseStartup<Startup>();
                 });
     }

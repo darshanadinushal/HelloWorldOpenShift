@@ -27,7 +27,7 @@ spec:
             - containerPort: 8080
           volumeMounts:
             - name: demo-app-config-volume
-              mountPath: /app/conf
+              mountPath: /src/conf
       volumes:
         - name: demo-app-config-volume
           configMap:

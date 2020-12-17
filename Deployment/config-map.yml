@@ -2,13 +2,15 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: demo-app-configmap
+  namespace: demo-appsetting
   labels:
     app: demo-app-configmap
 data:
-  appsettings.json: |
+  config.json: |
     {
-      "MySettings": {
-          "DbConnection": "abc-example",
+      "config": {
+          "message": "test-IHIS-abc-www",
+          "Dbcon": "test1",
           "Email": "abc@domain.com",
           "SMTPPort": "5605"
         }

@@ -18,7 +18,9 @@ namespace HelloWorldOpenShift.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { _config.message };
+            var settingArray = new string[] { _config.message, _config.Dbcon, _config.Email ,_config.SMTPPort };
+
+            return settingArray;
         }
     }
 }
