@@ -1,0 +1,8 @@
+{
+  "config": {
+    "message": "test-IHIS-production",
+    "Dbcon": "test1-production",
+    "Email": "abc-production@domain.com",
+    "SMTPPort": "5605"
+  }
+}
