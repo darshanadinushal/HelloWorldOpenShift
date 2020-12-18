@@ -1,7 +1,7 @@
 {
   "config": {
     "message": "test-IHIS-production",
-    "Dbcon": "test1-production",
+    "Dbcon": "Server=(localdb)\\mssqllocaldb-prod;Database=IHIS-prod;Trusted_Connection=True;MultipleActiveResultSets=true",
     "Email": "abc-production@domain.com",
     "SMTPPort": "5605"
   }
