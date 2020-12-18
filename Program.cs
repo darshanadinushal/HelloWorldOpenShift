@@ -22,11 +22,9 @@ namespace HelloWorldOpenShift
                 {
                     webBuilder.ConfigureAppConfiguration((hostingContext, conf) =>
                     {
-                        //conf.Sources.Clear();
-
                         var env = hostingContext.HostingEnvironment;
 
-                        conf.AddJsonFile($"conf/config.json",optional: true, reloadOnChange: true);
+                        conf.AddJsonFile($"conf/config.{env.EnvironmentName}.json",optional: true, reloadOnChange: true);
                         conf.AddJsonFile("appsettings.json", optional: true);
                         conf.AddEnvironmentVariables();
                     }).UseStartup<Startup>();
