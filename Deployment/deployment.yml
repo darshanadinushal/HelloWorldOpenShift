@@ -1,11 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-app-deployment
-  namespace: demo-appsetting
-  annotations:
-    configmap.reloader.stakater.com/reload: demo-app-configmap
-    reloader.stakater.com/auto: 'true'
+  name: demo-env-deployment
+  namespace: demo-configmap-env
 spec:
   replicas: 1
   selector:
@@ -18,26 +15,22 @@ spec:
     spec:
       containers:
         - name: lab-deployment
-          image: darshanadinushal/helloworldapp:latest
+          image: darshanadinushal/helloworldapp:3.3
+          env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: "Production"
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
           ports:
             - containerPort: 8080
-          volumeMounts:
-            - name: demo-app-config-volume
-              mountPath: /src/conf
-      volumes:
-        - name: demo-app-config-volume
-          configMap:
-            name: demo-app-configmap
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: configmap-service
-  namespace: demo-appsetting
+  name: env-service
+  namespace: demo-configmap-env
 spec:
   selector:
     app: lab-deployment

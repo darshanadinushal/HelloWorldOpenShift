@@ -1,8 +1,8 @@
 {
   "config": {
-    "message": "test-IHIS-abc-www",
+    "message": "test-IHIS-sample",
     "Dbcon": "test1",
-    "Email": "abc@domain.com",
+    "Email": "abc@domain.com-sample",
     "SMTPPort": "5605"
   }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 
 namespace HelloWorldOpenShift.Controllers
@@ -16,11 +17,25 @@ namespace HelloWorldOpenShift.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        [Route("GetVolumeConfig")]
+        public ActionResult<IEnumerable<string>> GetVolumeConfig()
         {
             var settingArray = new string[] { _config.message, _config.Dbcon, _config.Email ,_config.SMTPPort };
 
             return settingArray;
         }
+
+
+
+        [HttpGet]
+        [Route("GetEnvConfig")]
+        public ActionResult<string> GetEnvConfig()
+        {
+            var environmentName = "ENV Variable4 :"+Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+
+            return environmentName.ToString();
+        }
+
+
     }
 }
