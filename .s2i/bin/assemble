@@ -1,1 +1,8 @@
-asas
+#!/bin/bash
+
+# Run additional build before steps
+
+# Execute original assemble script.
+/usr/libexec/s2i/assemble
+
+# Run additional build after steps
