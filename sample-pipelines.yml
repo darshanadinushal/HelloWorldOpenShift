@@ -12,6 +12,27 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+stages: 
+- stage: Build
+  displayName: Build
+  jobs:
+  - job: BuildJob
+    steps: 
+
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-hub-connection'
+        repository: 'darshanadinushal/helloworldapp'
+        command: 'build'
+        Dockerfile: 'Dockerfile'
+        buildContext: '.'
+        tags: '$(tag)'
+        
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'docker-hub-connection'
+        repository: 'darshanadinushal/helloworldapp'
+        command: 'push'
+        tags: '$(tag)'
