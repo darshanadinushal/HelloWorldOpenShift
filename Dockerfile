@@ -1,13 +1,21 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build-env
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:3.1 AS base
 WORKDIR /app
-COPY ["HelloWorldOpenShift.csproj", "."]
-RUN dotnet restore "HelloWorldOpenShift.csproj"
-COPY . .
-RUN dotnet publish "HelloWorldOpenShift.csproj" -c Release -o /out
-
-
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
-WORKDIR /src
 EXPOSE 80
-COPY --from=build-env /out .
+
+FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
+WORKDIR /src
+COPY ["HelloWorldOpenShift.csproj", "."]
+RUN dotnet restore "./HelloWorldOpenShift.csproj"
+COPY . .
+WORKDIR "/src/."
+RUN dotnet build "HelloWorldOpenShift.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "HelloWorldOpenShift.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "HelloWorldOpenShift.dll"]
